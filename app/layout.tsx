@@ -31,7 +31,7 @@ export default function RootLayout({
         spaceGrotesk.variable
       )}
     >
-      <body>
+      <body className="bg-white">
         <ThemeProvider defaultTheme="dark" forcedTheme="dark">
           <Toaster position="top-right" />
           {children}

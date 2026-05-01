@@ -51,44 +51,50 @@ const pages = [
 
 export default function Sidebar() {
   const [open, setOpen] = useState(true)
-  const [width, setWidth] = useState(300)
+  const [width, setWidth] = useState(250)
 
   useEffect(() => {
-    setWidth(open ? 300 : 45)
+    setWidth(open ? 250 : 48)
   }, [open])
 
   return (
     <motion.div
-      animate={{ width: width }}
-      transition={
-        open
-          ? { type: "spring", stiffness: 70, bounce: 0.5 }
-          : { type: "tween", duration: 0.5, ease: "easeInOut" }
-      }
-      className="relative max-h-screen bg-transparent"
+      style={{
+        minWidth: open ? 250 : 50,
+      }}
+      animate={{
+        width: open ? 250 : 50,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 50,
+        damping: 15,
+      }}
+      className={`relative max-h-screen bg-transparent transition duration-500 ease-in-out`}
     >
-      <Button
-        onClick={() => setOpen(!open)}
-        className="absolute top-2 -right-12"
-      >
-        <IconLayoutSidebar></IconLayoutSidebar>
-      </Button>
       <motion.div
-        animate={open ? { width: width - 50 } : { width: 45 }}
+        animate={open ? { width: width } : { width: width }}
         transition={
           open
-            ? { type: "spring", stiffness: 70, bounce: 0.5 }
+            ? { type: "spring", stiffness: 50, bounce: 0.5 }
             : { type: "tween", duration: 0.5, ease: "easeInOut" }
         }
-        className="fixed left-0 z-40 h-full overflow-hidden bg-primary-blue-400"
+        className="fixed left-0 z-40 h-full bg-primary-blue-400"
       >
-        <div className="flex gap-4 border-b border-white/20 p-2.5">
-          <div>
-            <IconShoe size={30}></IconShoe>
+        <Button
+          onClick={() => setOpen(!open)}
+          className="absolute top-1.5 -right-12 z-50"
+        >
+          <IconLayoutSidebar></IconLayoutSidebar>
+        </Button>
+
+        <div className="h-full overflow-hidden">
+          <div className="flex gap-4 border-b border-white/20 p-2.5">
+            <div>
+              <IconShoe size={30}></IconShoe>
+            </div>
+            <Label className="text-xl font-semibold text-white">Travlr</Label>
           </div>
-          <Label className="text-xl font-semibold">Travlr</Label>
-        </div>
-        <div className="h-full">
           {pages.map((item, i) => (
             <div
               key={i}
@@ -98,7 +104,7 @@ export default function Sidebar() {
                 <item.icon className=""></item.icon>
               </div>
               <div className="min-w-50">
-                <Label>{item.label}</Label>
+                <Label className="text-white">{item.label}</Label>
               </div>
             </div>
           ))}
@@ -108,7 +114,7 @@ export default function Sidebar() {
           className="absolute bottom-0 flex w-full justify-start gap-4 rounded-none"
         >
           <IconLogout2 className="text-red-500"></IconLogout2>
-          <Label>Logout</Label>
+          <Label className="text-white">Logout</Label>
         </Button>
       </motion.div>
     </motion.div>
