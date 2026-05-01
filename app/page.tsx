@@ -42,9 +42,7 @@ export default function Page() {
             <Input type="password" label="Password"></Input>
           </div>
           <div className="flex flex-col gap-4">
-            <Button onClick={handleLogin} className="w-full">
-              Login
-            </Button>
+            <Button onClick={handleLogin}>Login</Button>
             <Button onClick={handleNavForgot} variant={"ghost"}>
               Forgot Password?
             </Button>

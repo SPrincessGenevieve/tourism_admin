@@ -7,6 +7,7 @@ import { Field, FieldDescription, FieldLabel } from "./field"
 
 interface InputProps extends React.ComponentProps<"input"> {
   label?: string
+  labelClassname?: string
   description?: string
 }
 
@@ -16,6 +17,7 @@ function Input({
   label,
   description,
   id,
+  labelClassname,
   ...props
 }: InputProps) {
   const [isVisible, setIsVisible] = React.useState(false)
@@ -30,7 +32,11 @@ function Input({
 
   return (
     <Field>
-      {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
+      {label && (
+        <FieldLabel className={`${labelClassname}`} htmlFor={inputId}>
+          {label}
+        </FieldLabel>
+      )}
 
       <div className="relative">
         <input
@@ -38,7 +44,7 @@ function Input({
           type={resolvedType}
           data-slot="input"
           className={cn(
-            "h-9 w-full min-w-0 rounded-3xl border border-transparent bg-input/50 px-3 py-1 text-base transition-[color,box-shadow,background-color] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+            `h-9 w-full min-w-0 rounded-3xl border border-transparent bg-input/50 px-3 py-1 text-base transition-[color,box-shadow,background-color] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40`,
             isPassword && "pr-10", // Add padding so text doesn't overlap the icon
             className
           )}

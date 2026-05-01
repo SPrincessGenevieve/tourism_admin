@@ -32,7 +32,7 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>
+        <ThemeProvider defaultTheme="dark" forcedTheme="dark">
           <Toaster position="top-right" />
           {children}
         </ThemeProvider>
