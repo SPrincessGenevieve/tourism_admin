@@ -14,7 +14,7 @@ export default function Page() {
 
   const handleLogin = () => {
     toast.success("Success", { description: "Login successful. Welcome back!" })
-    router.push("/")
+    router.push("/dashboard")
   }
 
   const handleNavForgot = () => {
