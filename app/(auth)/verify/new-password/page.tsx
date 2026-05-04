@@ -48,8 +48,16 @@ export default function page() {
         >
           <div className="mt-8 flex h-full w-full flex-col items-center gap-8">
             <div className="flex w-full flex-col gap-2">
-              <Input label="Password" type="password"></Input>
-              <Input label="Confirm Password" type="password"></Input>
+              <Input
+                labelClassname="text-white"
+                label="Password"
+                type="password"
+              ></Input>
+              <Input
+                labelClassname="text-white"
+                label="Confirm Password"
+                type="password"
+              ></Input>
             </div>
             <div className="flex w-full flex-col gap-4">
               <Button onClick={handleUpdatePassword}>Confirm Password</Button>

@@ -38,8 +38,16 @@ export default function Page() {
           }
         >
           <div className="my-4 flex flex-col gap-2">
-            <Input placeholder="example@gmail.com" label="Email"></Input>
-            <Input type="password" label="Password"></Input>
+            <Input
+              labelClassname="text-white"
+              placeholder="example@gmail.com"
+              label="Email"
+            ></Input>
+            <Input
+              labelClassname="text-white"
+              type="password"
+              label="Password"
+            ></Input>
           </div>
           <div className="flex flex-col gap-4">
             <Button onClick={handleLogin}>Login</Button>

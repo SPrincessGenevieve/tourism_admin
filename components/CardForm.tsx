@@ -30,7 +30,9 @@ export default function CardForm({
               <Label className="my-2 text-center text-2xl font-semibold text-white">
                 {title}
               </Label>
-              <Label className="text-center font-thin">{description}</Label>
+              <Label className="text-center font-thin text-white">
+                {description}
+              </Label>
             </div>
           </div>
         </CardHeader>

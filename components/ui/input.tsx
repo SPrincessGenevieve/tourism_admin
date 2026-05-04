@@ -5,10 +5,13 @@ import { IconEye, IconEyeOff } from "@tabler/icons-react"
 import { cn } from "@/lib/utils"
 import { Field, FieldDescription, FieldLabel } from "./field"
 
+type InputVariant = "default" | "light"
+
 interface InputProps extends React.ComponentProps<"input"> {
   label?: string
   labelClassname?: string
   description?: string
+  variant?: InputVariant
 }
 
 function Input({
@@ -18,6 +21,7 @@ function Input({
   description,
   id,
   labelClassname,
+  variant = "default",
   ...props
 }: InputProps) {
   const [isVisible, setIsVisible] = React.useState(false)
@@ -25,15 +29,41 @@ function Input({
 
   const isPassword = type === "password"
 
-  // Determine the actual type to pass to the HTML input
   const resolvedType = isPassword ? (isVisible ? "text" : "password") : type
 
   const toggleVisibility = () => setIsVisible((prev) => !prev)
 
+  // Base styles
+  const baseStyles = `
+    h-9 w-full min-w-0 rounded-3xl border px-3 py-1 text-base outline-none
+    transition-[color,box-shadow,background-color]
+    file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium
+    placeholder:text-muted-foreground
+    focus-visible:ring-3
+    disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50
+    aria-invalid:ring-3
+    md:text-sm
+  `
+
+  // Variants
+  const variants: Record<InputVariant, string> = {
+    default: `
+      border-transparent bg-input/50 rounded-xl
+      focus-visible:border-ring focus-visible:ring-ring/30
+      aria-invalid:border-destructive aria-invalid:ring-destructive/20
+      dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40
+    `,
+    light: `
+      border-gray-300 bg-white text-black rounded-xl
+      focus-visible:border-blue-500 focus-visible:ring-blue-200
+      aria-invalid:border-red-500 aria-invalid:ring-red-200
+    `,
+  }
+
   return (
     <Field>
       {label && (
-        <FieldLabel className={`${labelClassname}`} htmlFor={inputId}>
+        <FieldLabel className={labelClassname} htmlFor={inputId}>
           {label}
         </FieldLabel>
       )}
@@ -44,8 +74,9 @@ function Input({
           type={resolvedType}
           data-slot="input"
           className={cn(
-            `h-9 w-full min-w-0 rounded-3xl border border-transparent bg-input/50 px-3 py-1 text-base transition-[color,box-shadow,background-color] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40`,
-            isPassword && "pr-10", // Add padding so text doesn't overlap the icon
+            baseStyles,
+            variants[variant],
+            isPassword && "pr-10",
             className
           )}
           {...props}

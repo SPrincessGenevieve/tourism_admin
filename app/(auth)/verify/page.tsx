@@ -57,8 +57,10 @@ export default function VerifyPage() {
                 <IconArrowLeft></IconArrowLeft> Back to Sign-in
               </Button>
               <div className="flex flex-wrap items-center justify-center gap-2">
-                <Label className="font-bold">00:29</Label>
-                <Label className="font-light">Resend Confirmation Code</Label>
+                <Label className="font-bold text-white">00:29</Label>
+                <Label className="font-light text-white">
+                  Resend Confirmation Code
+                </Label>
               </div>
             </div>
           </div>

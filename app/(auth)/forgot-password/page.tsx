@@ -41,6 +41,7 @@ export default function ForgotPasswordPage() {
         >
           <div className="mt-8 flex h-full w-full flex-col gap-8">
             <Input
+              labelClassname="text-white"
               label="Email Address"
               placeholder="example@gmail.com"
             ></Input>

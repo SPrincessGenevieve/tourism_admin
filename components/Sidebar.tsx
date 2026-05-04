@@ -15,17 +15,18 @@ import {
   IconShoe,
 } from "@tabler/icons-react"
 import { Label } from "./ui/label"
+import { useRouter } from "next/navigation"
 
 const pages = [
   {
     label: "Dashboard",
     icon: IconDashboard,
-    href: "",
+    href: "/dashboard",
   },
   {
     label: "Packages",
     icon: IconBox,
-    href: "",
+    href: "/packages",
   },
   {
     label: "Schedules",
@@ -52,10 +53,15 @@ const pages = [
 export default function Sidebar() {
   const [open, setOpen] = useState(true)
   const [width, setWidth] = useState(250)
+  const router = useRouter()
 
   useEffect(() => {
     setWidth(open ? 250 : 48)
   }, [open])
+
+  const handleNav = (href: string) => {
+    router.push(href)
+  }
 
   return (
     <motion.div
@@ -97,6 +103,7 @@ export default function Sidebar() {
           </div>
           {pages.map((item, i) => (
             <div
+              onClick={() => handleNav(item.href)}
               key={i}
               className="flex h-10 w-full items-center justify-start gap-4 overflow-hidden rounded-none bg-transparent p-2.5 text-white transition duration-300 ease-in-out hover:bg-white/30"
             >
